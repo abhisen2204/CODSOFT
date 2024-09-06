@@ -1,0 +1,34 @@
+def calculator():
+    operations = {
+        '1': ('Addition', lambda x, y: x + y),
+        '2': ('Subtraction', lambda x, y: x - y),
+        '3': ('Multiplication', lambda x, y: x * y),
+        '4': ('Division', lambda x, y: x / y if y != 0 else "Error: Division by zero")
+    }
+
+    print("Select operation:")
+    for key, (name, _) in operations.items():
+        print(f"{key}. {name}")
+
+    choice = input("Enter choice (1/2/3/4): ")
+
+    if choice not in operations:
+        print("Invalid input")
+        return
+
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+    except ValueError:
+        print("Invalid number input")
+        return
+
+    operation_name, operation_func = operations[choice]
+    result = operation_func(num1, num2)
+
+    if result == "Error: Division by zero":
+        print(result)
+    else:
+        print(f"The result of {operation_name.lower()} is: {result}")
+
+calculator()
